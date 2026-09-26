@@ -47,7 +47,7 @@
         });  
     } else {  
         if (window.applicationCache.status == '0') {  
-            if (fwNum >= 5.05 && fwNum <= 5.05) {
+            if (fwNum >= 5.05 && fwNum <= 5.07) {
                 msgs.innerHTML = "Установка кэша для " + fwVersion + "...";
                 setTimeout(function() {
                     window.location.replace("cache505.html");
@@ -57,16 +57,11 @@
                 setTimeout(function() {
                     window.location.replace("cache672.html");
                 }, 500);
-            } else if (fwNum >= 7.00 && fwNum <= 8.52) {  
-                msgs.innerHTML = "Установка кэша для " + fwVersion + "...";  
-                setTimeout(function() {  
-                    window.location.replace("cache700.html");  
-                }, 500);  
-            } else if (fwNum >= 9.00 && fwNum <= 9.60) {  
-                msgs.innerHTML = "Установка кэша для " + fwVersion + "...";  
-                setTimeout(function() {  
-                    window.location.replace("cache900.html");  
-                }, 500);  
+            } else if (fwNum >= 7.00 && fwNum <= 9.60) {
+                msgs.innerHTML = "Установка кэша для " + fwVersion + "...";
+                setTimeout(function() {
+                    window.location.replace("cache_g2allpro.html");
+                }, 500);
             } else if (fwNum >= 10.00 && fwNum <= 11.02) {  
                 msgs.innerHTML = "Установка кэша для " + fwVersion + "...";  
                 setTimeout(function() {  
@@ -90,7 +85,7 @@
             }  
         } else {  
             // Автоматический запуск exploit без кнопок
-            if (fwNum >= 5.05 && fwNum <= 5.05) {
+            if (fwNum >= 5.05 && fwNum <= 5.07) {
                 msgs.innerHTML = "Запуск эксплойта для " + fwVersion + "...";
                 var frame505 = document.createElement('iframe');
                 frame505.src = "505/index.html";
@@ -118,22 +113,19 @@
                     }
                 });
             }  
-            else if (fwNum >= 7.00 && fwNum <= 8.52) {  
-                msgs.innerHTML = "Запуск эксплойта для " + fwVersion + "...";  
-                var script = document.createElement('script');  
-                script.type = 'module';  
-                script.src = "700/alert.js";  
-                script.onerror = onScriptError;  
-                document.head.appendChild(script);  
-            }  
-            else if (fwNum >= 9.00 && fwNum <= 9.60) {  
-                msgs.innerHTML = "Запуск эксплойта для " + fwVersion + "...";  
-                var script = document.createElement('script');  
-                script.type = 'module';  
-                script.src = "900/alert.js";  
-                script.onerror = onScriptError;  
-                document.head.appendChild(script);  
-            }  
+            else if (fwNum >= 7.00 && fwNum <= 9.60) {
+                msgs.innerHTML = "Запуск эксплойта для " + fwVersion + "...";
+                var frameG2 = document.createElement('iframe');
+                frameG2.src = "g2allpro/index.html";
+                frameG2.style.cssText = "position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;";
+                document.body.appendChild(frameG2);
+                window.addEventListener('message', function(e) {
+                    if (e.data && e.data.type === 'statusG2') {
+                        msgs.innerHTML = e.data.msg;
+                        if (e.data.cls) { msgs.className = e.data.cls; }
+                    }
+                });
+            }
             else if (fwNum >= 10.00 && fwNum <= 11.02) {  
                 msgs.innerHTML = "Запуск эксплойта для " + fwVersion + "...";  
                 var script = document.createElement('script');  
